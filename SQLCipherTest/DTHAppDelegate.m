@@ -37,10 +37,12 @@
     [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithUTF8String:convertedDbPath] error:nil];
     
     
+    
     // Example #1: create an encrypted DB using SQLcipher
     [DTHSQLCipherUtils createDatabaseAtPath:encryptedDbPath shouldEncrypt:YES];
     [DTHSQLCipherUtils populateDatabase:encryptedDbPath isEncrypted:YES];
-    // Ensure that the DB contains our test data
+    
+    // Validate the DB's integrity by ensuring that it contains our test data
     if (![[DTHSQLCipherUtils fetchContentFromDatabase:encryptedDbPath isEncrypted:YES] isEqualToString:@"testest123"]) {
         // This should not happen
         NSLog((@"Encrypted DB: Error!"));
@@ -55,6 +57,7 @@
     // Create the plaintext DB
     [DTHSQLCipherUtils createDatabaseAtPath:plaintextDbPath shouldEncrypt:NO];
     [DTHSQLCipherUtils populateDatabase:plaintextDbPath isEncrypted:NO];
+    
     if (![[DTHSQLCipherUtils fetchContentFromDatabase:plaintextDbPath isEncrypted:NO] isEqualToString:@"testest123"]) {
         // This should not happen
         NSLog((@"Plaintext DB: Error!"));
@@ -65,6 +68,8 @@
     
     // Convert the plaintext DB to an encrypted DB
     [DTHSQLCipherUtils convertDatabaseAtPath:plaintextDbPath toEncryptedDatabaseAtPath:convertedDbPath];
+    
+    // Validate the new encrypted DB's integrity by ensuring that it contains our test data
     if (![[DTHSQLCipherUtils fetchContentFromDatabase:convertedDbPath isEncrypted:YES] isEqualToString:@"testest123"]) {
         NSLog((@"Converted DB: Error!"));
     }
