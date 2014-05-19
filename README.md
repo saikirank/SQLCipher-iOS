@@ -7,8 +7,10 @@ Quick proof of concept for using SQLCipher on iOS
 ### Build Instructions
 Before opening the Xcode project, you will need to do the following:
 * In the project's root folder:
-     git clone https://github.com/sqlcipher/sqlcipher.git
-     git clone https://github.com/sqlcipher/openssl-xcode.git
+
+    git clone https://github.com/sqlcipher/sqlcipher.git
+    git clone https://github.com/sqlcipher/openssl-xcode.git
+
 * Then add OpenSSL's source code to Xcode by following the instructions in the "Add OpenSSL Source Tree" section at http://sqlcipher.net/ios-tutorial. After doing so, you should be able to open the project in Xcode and build it.
 
 
